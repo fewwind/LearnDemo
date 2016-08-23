@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- facebook appID -->
+    <string name="facebook_app_id">980064892121910</string>
+
+    <!-- google+ serverID （用于申请token）-->
+    <string name="server_client_id">621944126207-ulhhhh4s4i57iqmacdulgi2mbaf5omca.apps.googleusercontent.com</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">980064892121910</string>
+    <string name="server_client_id">621944126207-ulhhhh4s4i57iqmacdulgi2mbaf5omca.apps.googleusercontent.com</string>
+    <style name="AppTheme" parent="android:Theme.Translucent">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="myTransparent" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
