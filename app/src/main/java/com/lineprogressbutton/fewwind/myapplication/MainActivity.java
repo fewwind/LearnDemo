@@ -30,20 +30,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.OnClick;
 import com.lineprogressbutton.fewwind.myapplication.base.BaseActivity;
 import com.lineprogressbutton.fewwind.myapplication.test.EnumTest;
-
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
@@ -76,10 +72,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ButterKnife.bind(this);
 
         videoPlayerStandard = (JCVideoPlayerStandard) findViewById(R.id.custom_videoplayer_standard);
         sb1 = (AppCompatSeekBar) findViewById(R.id.id_sb1);
@@ -92,6 +86,7 @@ public class MainActivity extends BaseActivity {
         mCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 CircularAnim.startActivityAsCircular(MainActivity.this, SecondActivity.class, mCircle, R.color.colorAccent);
             }
         });
@@ -181,6 +176,11 @@ public class MainActivity extends BaseActivity {
 
         saveImage();
 
+    }
+
+
+    @Override protected int initLayoutId() {
+        return R.layout.activity_main;
     }
 
 
@@ -355,6 +355,7 @@ public class MainActivity extends BaseActivity {
         intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivity(intentCamera);
     }
+
 
 
     @Override

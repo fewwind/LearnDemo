@@ -7,14 +7,12 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Window;
 import android.widget.ImageView;
-
+import com.lineprogressbutton.fewwind.myapplication.base.BaseActivity;
 import java.io.IOException;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends BaseActivity {
 
 
     private ImageView mIv;
@@ -23,7 +21,6 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_second);
 
         mIv = (ImageView) findViewById(R.id.id_second_iv);
 
@@ -47,6 +44,11 @@ public class SecondActivity extends AppCompatActivity {
                 Log.e("tag", rato1 + "===" + rato2);
             }
         });
+    }
+
+
+    @Override protected int initLayoutId() {
+        return R.layout.activity_second;
     }
 
 

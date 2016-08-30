@@ -7,31 +7,31 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.lineprogressbutton.fewwind.myapplication.R;
-import com.orhanobut.logger.Logger;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.lineprogressbutton.fewwind.myapplication.R;
+import com.lineprogressbutton.fewwind.myapplication.base.BaseActivity;
+import com.lineprogressbutton.fewwind.myapplication.view.LeiDaView;
+import com.orhanobut.logger.Logger;
 
-public class AnimActivity extends AppCompatActivity {
+public class AnimActivity extends BaseActivity {
 
     @Bind(R.id.id_anim_iv)
     ImageView mIv1;
     @Bind(R.id.id_anim_ball)
     ImageView mIvBall;
+    @Bind(R.id.id_leida)
+    LeiDaView mLeiDa;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anim);
 
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -47,6 +47,11 @@ public class AnimActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
             }
         });
+    }
+
+
+    @Override protected int initLayoutId() {
+        return R.layout.activity_anim;
     }
 
 

@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import com.lineprogressbutton.fewwind.myapplication.MainActivity;
 import com.lineprogressbutton.fewwind.myapplication.R;
 import com.lineprogressbutton.fewwind.myapplication.SecondActivity;
 import com.lineprogressbutton.fewwind.myapplication.base.BaseActivity;
 import com.lineprogressbutton.fewwind.myapplication.test.ActivityBean;
-import com.lineprogressbutton.fewwind.myapplication.view.TestImageView;
+import com.lineprogressbutton.fewwind.myapplication.test.Main;
 import com.orhanobut.logger.Logger;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -29,6 +28,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class SplashActivity extends BaseActivity {
 
+    private static final String SHOWCASE_ID = "guaid";
     @Bind(R.id.id_recycler)
     RecyclerView mRecycler;
 
@@ -37,11 +37,11 @@ public class SplashActivity extends BaseActivity {
         android.R.color.holo_blue_bright, };
 
     private CommonAdapter mAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
 
         initDatas();
         mRecycler.setLayoutManager(new GridLayoutManager(this, 2));
@@ -71,46 +71,60 @@ public class SplashActivity extends BaseActivity {
     }
 
 
+    @Override protected int initLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+
     @Override protected void onStart() {
         super.onStart();
 
         mRecycler.postDelayed(new Runnable() {
             @Override public void run() {
 
-
                 //View childAt = mRecycler.getChildAt(0);  得到是空的
-                View childAt = mRecycler.getLayoutManager().getChildAt(1);
+                View childAt = null;
+                try {
 
-
-                if (childAt==null){
-                    Logger.e("拿不到 是空的");
-
-                } else{
-                    Logger.i(childAt.getX()+"--x坐标==y坐标--"+childAt.getY());
-                    TextView tv = (TextView) childAt.findViewById(android.R.id.text1);
-                    tv.setText("2秒之后我变了");
-
-                    new MaterialShowcaseView.Builder(SplashActivity.this)
-                        .setTarget(childAt)
-                        .setDismissText("GOT IT")
-                        .setContentText("This is some amazing feature you should know about")
-                        .setDelay(100) // optional but starting animations immediately in onCreate can make them choppy
-                        //.singleUse(SHOWCASE_ID) // provide a unique ID used to ensure it is only shown once
-                        .show();
-
+                    childAt = mRecycler.getLayoutManager().getChildAt(1);
+                } catch (Exception e) {
+                    Logger.e((e instanceof NullPointerException)+"--主动捕获异常--"+e.toString());
                 }
+
+                if (childAt == null) return;
+
+                Logger.i(childAt.getX() + "--x坐标==y坐标--" + childAt.getY());
+                TextView tv = (TextView) childAt.findViewById(android.R.id.text1);
+                tv.setText("2秒之后我变了");
+
+                new MaterialShowcaseView.Builder(SplashActivity.this)
+                    .setTarget(childAt)
+                    .setDismissText("GOT IT")
+                    .setContentText("This is some amazing feature you should know about")
+                    .setDelay(
+                        100) // optional but starting animations immediately in onCreate can make them choppy
+                    .singleUse(
+                        SHOWCASE_ID) // provide a unique ID used to ensure it is only shown once
+                    .show();
+
             }
-        },2000);
+        }, 2000);
 
     }
 
 
     private void initDatas() {
+
+        Main  main = new Main();
+        main.test(null);
+
         mLists.add(new ActivityBean(0, "主页", MainActivity.class));
         mLists.add(new ActivityBean(0, "倒影", SecondActivity.class));
         mLists.add(new ActivityBean(1, "拖拽", ViewDragHelperActivity.class));
         mLists.add(new ActivityBean(0, "RxTest", RxActivity.class));
         mLists.add(new ActivityBean(0, "动画", AnimActivity.class));
+        mLists.add(new ActivityBean(0, "Fragment状态", FragmentStateTest.class));
+        mLists.add(new ActivityBean(0, "Behavior", BehaivorActivity.class));
 
         Observable.from(mLists).filter(new Func1<ActivityBean, Boolean>() {
             @Override
@@ -133,7 +147,7 @@ public class SplashActivity extends BaseActivity {
                 List<ActivityBean> datas = new ArrayList<ActivityBean>();
 
                 if (aBoolean) {
-                    datas.add(new ActivityBean(0, "tag", TestImageView.class));
+                    //datas.add(new ActivityBean(0, "tag", TestImageView.class));
                 }
                 return datas;
             }
@@ -159,7 +173,8 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
-    public void learnGit(){
+
+    public void learnGit() {
 
     }
 }

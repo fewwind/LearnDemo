@@ -7,4 +7,24 @@
     tools:context="com.lineprogressbutton.fewwind.myapplication.activity.RxActivity">
 
     <include layout="@layout/toolbar"></include>
+
+    <Button
+        android:id="@+id/id_fast_blur1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/id_fast_blur2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/id_fast_blur3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/id_iv_blur"
+        android:scaleType="fitXY"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 </LinearLayout>
